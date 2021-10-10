@@ -1,5 +1,8 @@
 package renderer;
 
+import renderer.point.MyPoint;
+import renderer.shapes.MyPolygon;
+
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
@@ -11,8 +14,8 @@ public class Display extends Canvas implements Runnable {
     private Thread thread;
     private JFrame frame;
     private static String title = "EnSim";
-    private static final int WIDTH = 800;
-    private static final int HEIGHT = 600;
+    public static final int WIDTH = 800;
+    public static final int HEIGHT = 600;
     private static boolean running = false;
 
     public Display() {
@@ -93,6 +96,13 @@ public class Display extends Canvas implements Runnable {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, WIDTH * 2 , HEIGHT * 2);
 
+        MyPolygon poly = new MyPolygon(
+                new MyPoint(0 ,100, 0),
+                new MyPoint(0, 0, 100),
+                new MyPoint(100, 0, 0));
+
+        poly.render(g);
+
         g.dispose();
         bs.show();
     }
@@ -101,6 +111,3 @@ public class Display extends Canvas implements Runnable {
 
     }
 }
-
-// Test
-
