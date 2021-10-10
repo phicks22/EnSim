@@ -102,5 +102,5 @@ public class Display extends Canvas implements Runnable {
     }
 }
 
-// Tests
+// Test
 
