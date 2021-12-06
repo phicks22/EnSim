@@ -2,6 +2,7 @@ package renderer;
 
 import renderer.point.MyPoint;
 import renderer.shapes.MyPolygon;
+import renderer.shapes.Tetrahedron;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -17,6 +18,9 @@ public class Display extends Canvas implements Runnable {
     public static final int WIDTH = 800;
     public static final int HEIGHT = 600;
     private static boolean running = false;
+
+    private Tetrahedron tetra;
+    private Polygon poly;
 
     public Display() {
         this.frame = new JFrame();
@@ -85,6 +89,30 @@ public class Display extends Canvas implements Runnable {
         stop();
     }
 
+    public void init() {
+        int s = 100;
+//        MyPoint p1 = new MyPoint( s/2, -s/2, -s/2);
+//        MyPoint p2 = new MyPoint( s/2, s/2, -s/2);
+//        MyPoint p3 = new MyPoint( s/2, s/2, s/2);
+//        MyPoint p4 = new MyPoint( s/2, -s/2, s/2);
+//        MyPoint p5 = new MyPoint( -s/2, -s/2, -s/2);
+//        MyPoint p6 = new MyPoint( -s/2, s/2, -s/2);
+//        MyPoint p7 = new MyPoint( -s/2, s/2, s/2);
+//        MyPoint p8 = new MyPoint( -s/2, -s/2, s/2);
+//
+//        this.tetra = new Tetrahedron(
+//                Color.BLUE,
+//                new MyPolygon(p1, p2, p3, p4),
+//                new MyPolygon(p5, p6, p7, p8),
+//                new MyPolygon(p1, p2, p5, p6),
+//                new MyPolygon(p1, p5, p8, p4),
+//                new MyPolygon(p2, p6, p7, p3),
+//                new MyPolygon(p4, p3, p7, p8)
+//
+//        );
+
+    }
+
     private void render(){
         BufferStrategy bs = this.getBufferStrategy();
         if(bs == null) {
@@ -101,7 +129,28 @@ public class Display extends Canvas implements Runnable {
                 new MyPoint(0, 0, 100),
                 new MyPoint(100, 0, 0));
 
-        poly.render(g);
+        int s = 100;
+        MyPoint p1 = new MyPoint( s/2, -s/2, -s/2);
+        MyPoint p2 = new MyPoint( s/2, s/2, -s/2);
+        MyPoint p3 = new MyPoint( s/2, s/2, s/2);
+        MyPoint p4 = new MyPoint( s/2, -s/2, s/2);
+        MyPoint p5 = new MyPoint( -s/2, -s/2, -s/2);
+        MyPoint p6 = new MyPoint( -s/2, s/2, -s/2);
+        MyPoint p7 = new MyPoint( -s/2, s/2, s/2);
+        MyPoint p8 = new MyPoint( -s/2, -s/2, s/2);
+
+        Tetrahedron tetra = new Tetrahedron(
+                Color.BLUE,
+                new MyPolygon(p1, p2, p3, p4),
+                new MyPolygon(p5, p6, p7, p8),
+                new MyPolygon(p1, p2, p5, p6),
+                new MyPolygon(p1, p5, p8, p4),
+                new MyPolygon(p2, p6, p7, p3),
+                new MyPolygon(p4, p3, p7, p8)
+
+        );
+
+        tetra.render(g);
 
         g.dispose();
         bs.show();
