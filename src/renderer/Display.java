@@ -75,9 +75,9 @@ public class Display extends Canvas implements Runnable {
             while (delta >= 1) {
                 update();
                 delta--;
+                render();
+                frames++;
             }
-            render();
-            frames++;
 
             if(System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
@@ -91,26 +91,22 @@ public class Display extends Canvas implements Runnable {
 
     public void init() {
         int s = 100;
-//        MyPoint p1 = new MyPoint( s/2, -s/2, -s/2);
-//        MyPoint p2 = new MyPoint( s/2, s/2, -s/2);
-//        MyPoint p3 = new MyPoint( s/2, s/2, s/2);
-//        MyPoint p4 = new MyPoint( s/2, -s/2, s/2);
-//        MyPoint p5 = new MyPoint( -s/2, -s/2, -s/2);
-//        MyPoint p6 = new MyPoint( -s/2, s/2, -s/2);
-//        MyPoint p7 = new MyPoint( -s/2, s/2, s/2);
-//        MyPoint p8 = new MyPoint( -s/2, -s/2, s/2);
-//
-//        this.tetra = new Tetrahedron(
-//                Color.BLUE,
-//                new MyPolygon(p1, p2, p3, p4),
-//                new MyPolygon(p5, p6, p7, p8),
-//                new MyPolygon(p1, p2, p5, p6),
-//                new MyPolygon(p1, p5, p8, p4),
-//                new MyPolygon(p2, p6, p7, p3),
-//                new MyPolygon(p4, p3, p7, p8)
-//
-//        );
-
+        MyPoint p1 = new MyPoint( s/2, -s/2, -s/2);
+        MyPoint p2 = new MyPoint( s/2, s/2, -s/2);
+        MyPoint p3 = new MyPoint( s/2, s/2, s/2);
+        MyPoint p4 = new MyPoint( s/2, -s/2, s/2);
+        MyPoint p5 = new MyPoint( -s/2, -s/2, -s/2);
+        MyPoint p6 = new MyPoint( -s/2, s/2, -s/2);
+        MyPoint p7 = new MyPoint( -s/2, s/2, s/2);
+        MyPoint p8 = new MyPoint( -s/2, -s/2, s/2);
+        this.tetra = new Tetrahedron(
+                new MyPolygon(p1, p2, p3, p4),
+                new MyPolygon(p5, p6, p7, p8),
+                new MyPolygon(p1, p2, p5, p6),
+                new MyPolygon(p1, p5, p8, p4),
+                new MyPolygon(p2, p6, p7, p3),
+                new MyPolygon(p4, p3, p7, p8)
+        );
     }
 
     private void render(){
@@ -140,16 +136,14 @@ public class Display extends Canvas implements Runnable {
         MyPoint p8 = new MyPoint( -s/2, -s/2, s/2);
 
         Tetrahedron tetra = new Tetrahedron(
-                Color.BLUE,
-                new MyPolygon(p1, p2, p3, p4),
+                new MyPolygon(Color.RED, p1, p2, p3, p4),
                 new MyPolygon(p5, p6, p7, p8),
                 new MyPolygon(p1, p2, p5, p6),
                 new MyPolygon(p1, p5, p8, p4),
                 new MyPolygon(p2, p6, p7, p3),
                 new MyPolygon(p4, p3, p7, p8)
-
         );
-
+        tetra.rotate(true, 10, 0, 0);
         tetra.render(g);
 
         g.dispose();
