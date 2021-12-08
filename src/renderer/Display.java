@@ -1,5 +1,6 @@
 package renderer;
 
+import renderer.input.Mouse;
 import renderer.point.MyPoint;
 import renderer.shapes.MyPolygon;
 import renderer.shapes.Tetrahedron;
@@ -21,11 +22,19 @@ public class Display extends Canvas implements Runnable {
 
     private Tetrahedron tetra;
 
+    private Mouse mouse;
+
     public Display() {
         this.frame = new JFrame();
 
         Dimension size = new Dimension(WIDTH, HEIGHT);
         this.setPreferredSize(size);
+
+        this.mouse = new Mouse();
+
+        this.addMouseListener(this.mouse);
+        this.addMouseMotionListener(this.mouse);
+        this.addMouseWheelListener(this.mouse);
     }
 
     public static void main(String[] args){
