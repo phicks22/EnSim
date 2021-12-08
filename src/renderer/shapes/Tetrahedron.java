@@ -1,7 +1,5 @@
 package renderer.shapes;
 
-import renderer.point.MyPoint;
-
 import java.awt.*;
 
 public class Tetrahedron {
@@ -35,7 +33,7 @@ public class Tetrahedron {
     }
 
     private void sortPolygons() {
-
+        MyPolygon.sortPolygons(this.polygons);
     }
 
     private void setPolygonColor() {

@@ -20,14 +20,12 @@ public class Display extends Canvas implements Runnable {
     private static boolean running = false;
 
     private Tetrahedron tetra;
-    private Polygon poly;
 
     public Display() {
         this.frame = new JFrame();
 
         Dimension size = new Dimension(WIDTH, HEIGHT);
         this.setPreferredSize(size);
-
     }
 
     public static void main(String[] args){
@@ -56,8 +54,6 @@ public class Display extends Canvas implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
     }
 
     @Override
@@ -67,6 +63,8 @@ public class Display extends Canvas implements Runnable {
         final double ns = 1000000000.0 / 60;
         double delta = 0;
         int frames = 0;
+
+        init();
 
         while (running) {
             long now = System.nanoTime();
@@ -89,7 +87,7 @@ public class Display extends Canvas implements Runnable {
         stop();
     }
 
-    public void init() {
+    private void init() {
         int s = 100;
         MyPoint p1 = new MyPoint( s/2, -s/2, -s/2);
         MyPoint p2 = new MyPoint( s/2, s/2, -s/2);
@@ -100,16 +98,15 @@ public class Display extends Canvas implements Runnable {
         MyPoint p7 = new MyPoint( -s/2, s/2, s/2);
         MyPoint p8 = new MyPoint( -s/2, -s/2, s/2);
         this.tetra = new Tetrahedron(
-                new MyPolygon(p1, p2, p3, p4),
-                new MyPolygon(p5, p6, p7, p8),
-                new MyPolygon(p1, p2, p5, p6),
-                new MyPolygon(p1, p5, p8, p4),
-                new MyPolygon(p2, p6, p7, p3),
-                new MyPolygon(p4, p3, p7, p8)
-        );
+                new MyPolygon(Color.WHITE, p5, p6, p7, p8),
+                new MyPolygon(Color.RED, p1, p2, p6, p5),
+                new MyPolygon(Color.ORANGE, p1, p5, p8, p4),
+                new MyPolygon(Color.GRAY, p2, p6, p7, p3),
+                new MyPolygon(Color.GREEN, p4, p3, p7, p8),
+                new MyPolygon(Color.BLUE, p1, p2, p3, p4));
     }
 
-    private void render(){
+    private void render() {
         BufferStrategy bs = this.getBufferStrategy();
         if(bs == null) {
             this.createBufferStrategy(3);
@@ -120,37 +117,13 @@ public class Display extends Canvas implements Runnable {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, WIDTH * 2 , HEIGHT * 2);
 
-        MyPolygon poly = new MyPolygon(
-                new MyPoint(0 ,100, 0),
-                new MyPoint(0, 0, 100),
-                new MyPoint(100, 0, 0));
-
-        int s = 100;
-        MyPoint p1 = new MyPoint( s/2, -s/2, -s/2);
-        MyPoint p2 = new MyPoint( s/2, s/2, -s/2);
-        MyPoint p3 = new MyPoint( s/2, s/2, s/2);
-        MyPoint p4 = new MyPoint( s/2, -s/2, s/2);
-        MyPoint p5 = new MyPoint( -s/2, -s/2, -s/2);
-        MyPoint p6 = new MyPoint( -s/2, s/2, -s/2);
-        MyPoint p7 = new MyPoint( -s/2, s/2, s/2);
-        MyPoint p8 = new MyPoint( -s/2, -s/2, s/2);
-
-        Tetrahedron tetra = new Tetrahedron(
-                new MyPolygon(Color.RED, p1, p2, p3, p4),
-                new MyPolygon(p5, p6, p7, p8),
-                new MyPolygon(p1, p2, p5, p6),
-                new MyPolygon(p1, p5, p8, p4),
-                new MyPolygon(p2, p6, p7, p3),
-                new MyPolygon(p4, p3, p7, p8)
-        );
-        tetra.rotate(true, 10, 0, 0);
-        tetra.render(g);
+        this.tetra.render(g);
 
         g.dispose();
         bs.show();
     }
 
-    private void update(){
-
+    private void update() {
+        this.tetra.rotate(true, 1, 1, 1);
     }
 }
