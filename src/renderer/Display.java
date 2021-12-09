@@ -1,12 +1,7 @@
 package renderer;
 
 import renderer.entity.EntityManager;
-import renderer.input.ClickType;
 import renderer.input.Mouse;
-import renderer.point.MyPoint;
-import renderer.point.PointConverter;
-import renderer.shapes.MyPolygon;
-import renderer.shapes.Tetrahedron;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;

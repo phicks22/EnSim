@@ -54,14 +54,12 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        System.out.println("Mouse Dragged");
         this.mouseX = e.getX();
         this.mouseY = e.getY();
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        System.out.println("Mouse Moved");
         this.mouseX = e.getX();
         this.mouseY = e.getY();
     }
