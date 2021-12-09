@@ -7,6 +7,15 @@ import java.awt.Point;
 public class PointConverter {
 
     private static double scale = 1;
+    private static final double ZoomFactor = 1.1;
+
+    public static void zoomIn() {
+        scale *= ZoomFactor;
+    }
+
+    public static void zoomOut() {
+        scale /= ZoomFactor;
+    }
 
     public static Point convertPoint(MyPoint point3D) {
         double x3d = point3D.y * scale;
