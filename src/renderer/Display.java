@@ -1,5 +1,6 @@
 package renderer;
 
+import renderer.input.ClickType;
 import renderer.input.Mouse;
 import renderer.point.MyPoint;
 import renderer.shapes.MyPolygon;
@@ -132,7 +133,19 @@ public class Display extends Canvas implements Runnable {
         bs.show();
     }
 
+    ClickType prevMouse = ClickType.Unknown;
+    int initialX, initialY;
     private void update() {
-        this.tetra.rotate(true, 1, 1, 1);
+        int x = this.mouse.getX();
+        int y = this.mouse.getY();
+        if(prevMouse != ClickType.LeftClick) {
+            int xDif = x - initialX;
+            int yDif = y - initialY;
+
+            this.tetra.rotate(true, 0, -yDif, xDif);
+
+        }
+        initialX = x;
+        initialY = y;
     }
 }
